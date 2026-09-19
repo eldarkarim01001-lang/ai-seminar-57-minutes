@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#02050b">
+<title>AI — 57 минут</title>
+<style>
+:root{--cyan:#72efff;--violet:#a78bff;--bg:#02050b;--glass:rgba(3,10,25,.58)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;min-height:100%;font-family:Inter,Arial,sans-serif;background:var(--bg);color:#fff}
+body{overflow-x:hidden}.scene{position:fixed;inset:0;overflow:hidden;background:
+radial-gradient(circle at 50% 45%,rgba(32,98,150,.18),transparent 38%),#02050b}
+.scene:before{content:"";position:absolute;inset:-30%;background:
+linear-gradient(rgba(86,224,255,.07) 1px,transparent 1px),
+linear-gradient(90deg,rgba(86,224,255,.07) 1px,transparent 1px);
+background-size:55px 55px;transform:perspective(500px) rotateX(62deg) translateY(22%);
+transform-origin:center bottom;animation:gridMove 12s linear infinite}
+.scene:after{content:"";position:absolute;inset:0;background:
+radial-gradient(circle at 50% 40%,transparent 0 22%,rgba(0,0,0,.22) 55%,rgba(0,0,0,.7) 100%);pointer-events:none}
+@keyframes gridMove{to{background-position:0 55px,0 55px}}
+.photo{position:absolute;inset:-8%;background:url("seminar_scene.png") center/cover no-repeat;opacity:.32;animation:camera 18s ease-in-out infinite alternate}
+@keyframes camera{0%{transform:scale(1.03) translate(-.5%,.2%)}100%{transform:scale(1.13) translate(.8%,-.8%)}}
+.light{position:absolute;top:-35%;left:-35%;width:38%;height:180%;background:linear-gradient(90deg,transparent,rgba(75,235,255,.17),transparent);transform:rotate(18deg);animation:sweep 7s ease-in-out infinite;mix-blend-mode:screen}
+@keyframes sweep{0%,18%{left:-35%}65%,100%{left:125%}}
+.particles{position:absolute;inset:0;pointer-events:none}.p{position:absolute;width:3px;height:3px;border-radius:50%;background:#8cecff;box-shadow:0 0 16px #36ddff;animation:rise linear infinite}
+@keyframes rise{from{transform:translateY(110vh);opacity:0}15%{opacity:.8}80%{opacity:.4}to{transform:translateY(-15vh);opacity:0}}
+.scan{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#65edff,transparent);box-shadow:0 0 22px #65edff;opacity:.3;animation:scan 6s linear infinite}
+@keyframes scan{from{top:-4%}to{top:105%}}
+.hud{position:absolute;inset:0;z-index:4;pointer-events:none}.corner{position:absolute;width:74px;height:74px;border-color:rgba(117,237,255,.55)}
+.tl{top:22px;left:22px;border-top:2px solid;border-left:2px solid}.tr{top:22px;right:22px;border-top:2px solid;border-right:2px solid}.bl{bottom:22px;left:22px;border-bottom:2px solid;border-left:2px solid}.br{bottom:22px;right:22px;border-bottom:2px solid;border-right:2px solid}
+.topbar{position:fixed;z-index:20;top:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px;border:1px solid rgba(255,255,255,.14);background:rgba(1,8,20,.55);backdrop-filter:blur(14px);border-radius:999px;box-shadow:0 10px 40px #0006}
+.lang{border:0;background:transparent;color:#9eb1c7;padding:8px 11px;border-radius:999px;cursor:pointer;font-weight:800;font-size:12px;transition:.2s}.lang:hover,.lang.active{color:#001017;background:linear-gradient(100deg,var(--cyan),#fff);box-shadow:0 0 20px #4de8ff55}
+.robot{width:130px;height:150px;margin:0 auto 4px;position:relative;filter:drop-shadow(0 0 28px rgba(65,226,255,.35));animation:robotFloat 3.2s ease-in-out infinite}
+.robot .head{position:absolute;left:21px;top:13px;width:88px;height:70px;border:2px solid #78edff;border-radius:25px 25px 29px 29px;background:linear-gradient(145deg,#172b45aa,#06101fdd);box-shadow:inset 0 0 22px #59eaff22,0 0 28px #49dfff33}
+.robot .eye{position:absolute;top:29px;width:13px;height:13px;border-radius:50%;background:#a9f7ff;box-shadow:0 0 18px #53eaff;animation:blink 4s infinite}.robot .e1{left:25px}.robot .e2{right:25px}
+.robot .mouth{position:absolute;left:32px;right:32px;bottom:12px;height:5px;border-radius:8px;background:#62eaff;box-shadow:0 0 12px #62eaff}
+.robot .antenna{position:absolute;left:63px;top:0;width:3px;height:15px;background:#76efff;box-shadow:0 0 10px #76efff}.robot .dot{position:absolute;left:-3px;top:-5px;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 16px #6defff}
+.robot .body{position:absolute;left:31px;top:88px;width:68px;height:49px;border:2px solid #70eaff;border-radius:18px;background:#081426cc;box-shadow:0 0 25px #43dfff22}.robot .core{position:absolute;left:25px;top:14px;width:17px;height:17px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 20px #63efff;background:#66efff88}
+.robot .arm{position:absolute;top:97px;width:14px;height:39px;border:2px solid #65eaff;border-radius:10px;background:#0a1a2d}.robot .a1{left:17px;transform:rotate(12deg)}.robot .a2{right:17px;transform:rotate(-12deg)}
+@keyframes robotFloat{50%{transform:translateY(-10px) rotate(1deg)}}@keyframes blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.12)}}
+.overlay{position:relative;z-index:6;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:85px 18px 30px}
+.panel{width:min(980px,94vw);text-align:center;padding:32px 38px 34px;border:1px solid rgba(255,255,255,.20);border-radius:30px;background:var(--glass);backdrop-filter:blur(16px);box-shadow:0 25px 100px #0008,0 0 70px #00cdfc12;position:relative;overflow:hidden}
+.panel:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.05) 48%,transparent 58%);transform:translateX(-120%);animation:panelSweep 8s ease-in-out infinite;pointer-events:none}@keyframes panelSweep{45%,100%{transform:translateX(120%)}}
+.badge{display:inline-block;padding:8px 15px;border-radius:99px;border:1px solid rgba(115,237,255,.45);color:#a6f3ff;background:#00dcff12;font-size:11px;letter-spacing:3px}
+h1{font-size:clamp(48px,8vw,100px);line-height:.9;margin:14px 0;letter-spacing:-5px;background:linear-gradient(100deg,#fff,#8defff,#a98bff);-webkit-background-clip:text;color:transparent}
+.subtitle{font-size:clamp(17px,2.1vw,25px);line-height:1.4;color:#e3edf7}.subtitle b{color:#7deeff}
+.btn{position:relative;overflow:hidden;margin-top:25px;padding:15px 26px;border:1px solid #b7f8ff;border-radius:14px;background:linear-gradient(100deg,#74edff,#fff);font-weight:900;color:#001017;cursor:pointer;box-shadow:0 0 35px #43e2ff59;transition:.25s}.btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 55px #43e2ff8c}.btn:active{transform:scale(.97)}.btn .ripple{position:absolute;border-radius:50%;background:#fff8;transform:scale(0);animation:ripple .55s linear;pointer-events:none}@keyframes ripple{to{transform:scale(5);opacity:0}}
+#questions,#final{display:none}.questionNo{font-size:12px;letter-spacing:3px;color:#76eaff;margin-bottom:18px}
+.question{font-size:clamp(28px,4.5vw,58px);line-height:1.08;font-weight:800;max-width:850px;margin:auto;letter-spacing:-1.5px}.question em{font-style:normal;color:#79edff}
+.options{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px}.option{min-width:220px;max-width:360px;flex:1;padding:17px 18px;border:1px solid #ffffff29;border-radius:16px;background:#ffffff0a;color:#eaf4ff;cursor:pointer;font-size:15px;font-weight:600;transition:.22s}.option:hover{background:#5ae6ff21;border-color:#67eaff;transform:translateY(-3px);box-shadow:0 12px 30px #00d9ff12}.option.selected{border-color:#78efff;background:#31d7ff30;box-shadow:0 0 30px #39deff29}
+.progress{margin:26px auto 0;max-width:600px;height:6px;background:#ffffff12;border-radius:10px;overflow:hidden}.progress i{display:block;height:100%;width:14%;background:linear-gradient(90deg,#55eaff,#9e8cff);transition:width .55s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 16px #55eaff}
+.response{height:28px;margin-top:14px;color:#9eb1c7;font-size:13px}.next{display:none;margin-top:4px}.next.show{display:inline-block}
+.fadeout{animation:fadeout .38s ease forwards}@keyframes fadeout{to{opacity:0;transform:scale(.97) translateY(-6px)}}.fadein{animation:fadein .55s ease forwards}@keyframes fadein{from{opacity:0;transform:scale(1.03) translateY(12px)}to{opacity:1;transform:none}}
+.big57{font-size:clamp(72px,15vw,170px);font-weight:900;line-height:.8;background:linear-gradient(100deg,#fff,#72efff,#a78bfa);-webkit-background-clip:text;color:transparent;letter-spacing:-10px}.finaltext{font-size:clamp(18px,2.5vw,29px);line-height:1.4;margin-top:25px}.finaltext b{color:#7deeff}.small{margin-top:18px;color:#9aaec2;font-size:13px;letter-spacing:1px}
+.profileIcon{font-size:58px;margin:8px 0;filter:drop-shadow(0 0 20px #64ebff59);animation:floatIcon 2.5s ease-in-out infinite}@keyframes floatIcon{50%{transform:translateY(-7px) rotate(2deg)}}.profileTitle{font-size:clamp(30px,4vw,52px);font-weight:900;margin:5px 0 14px;background:linear-gradient(100deg,#fff,#7cecff,#a78bfa);-webkit-background-clip:text;color:transparent}.profileText{max-width:760px;margin:auto;font-size:clamp(16px,2vw,21px);line-height:1.55;color:#e4edf6}.profileQuote{max-width:700px;margin:20px auto 0;padding:16px 20px;border-left:3px solid #70eaff;background:#64e6ff0f;border-radius:0 14px 14px 0;color:#9ed9e8;font-size:15px;font-style:italic}
+.langHint{margin-top:12px;color:#7e91a7;font-size:11px}.counter{position:absolute;top:15px;right:18px;color:#6f8297;font-size:11px}
+.ai-art{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.52}
+.neural{position:absolute;width:min(900px,78vw);height:auto;right:-10%;top:8%;filter:drop-shadow(0 0 18px #5deaff44);animation:neuralFloat 9s ease-in-out infinite}
+@keyframes neuralFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-18px,12px,0) scale(1.035)}}
+.orb{position:absolute;border-radius:50%;filter:blur(1px);border:1px solid #78edff55;box-shadow:0 0 45px #4de8ff33,inset 0 0 25px #4de8ff22}
+.orb1{width:120px;height:120px;left:8%;top:16%;background:radial-gradient(circle at 35% 30%,#b8fbff44,transparent 60%);animation:orbFloat1 7s ease-in-out infinite}
+.orb2{width:70px;height:70px;right:12%;bottom:17%;background:radial-gradient(circle at 40% 35%,#bca8ff55,transparent 60%);animation:orbFloat2 5.5s ease-in-out infinite}
+.orb3{width:28px;height:28px;left:22%;bottom:25%;background:#7deeff55;box-shadow:0 0 35px #65eaff;animation:orbFloat3 4s ease-in-out infinite}
+@keyframes orbFloat1{50%{transform:translate(25px,-22px) scale(1.08)}}@keyframes orbFloat2{50%{transform:translate(-20px,16px) scale(.9)}}@keyframes orbFloat3{50%{transform:translate(18px,-30px)}}
+.author-mark{position:fixed;z-index:21;left:50%;bottom:12px;transform:translateX(-50%);font-size:9px;letter-spacing:2px;color:#8195a9aa;opacity:.55;white-space:nowrap;pointer-events:none}
+@media(max-width:700px){.neural{width:125vw;right:-28%;top:18%;opacity:.55}.orb1{width:80px;height:80px;left:2%;top:22%}.author-mark{font-size:8px;bottom:7px;letter-spacing:1.4px}.topbar{top:10px}.overlay{padding:72px 10px 18px;align-items:center}.panel{padding:24px 14px 25px;border-radius:22px}.robot{transform:scale(.78);margin:-5px auto -15px}.robot:hover{transform:scale(.8)}h1{font-size:clamp(43px,14vw,72px);letter-spacing:-3px}.question{font-size:clamp(25px,8vw,40px)}.option{min-width:100%;padding:15px 13px}.corner{width:38px;height:38px}.tl,.tr{top:12px}.bl,.br{bottom:12px}.tl,.bl{left:12px}.tr,.br{right:12px}.small{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="scene">
+<div class="photo"></div>
+<div class="ai-art" aria-hidden="true">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <svg class="neural" viewBox="0 0 700 420" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="ng" x1="0" x2="1"><stop offset="0" stop-color="#72efff"/><stop offset="1" stop-color="#a78bff"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g fill="none" stroke="url(#ng)" stroke-width="1.5" opacity=".72">
+      <path d="M90 120 C180 55 210 180 300 105 S430 70 520 145 S610 210 660 120"/>
+      <path d="M45 280 C150 190 210 330 310 235 S470 180 570 270 S625 320 680 250"/>
+      <path d="M135 55 L180 360 M250 35 L320 385 M390 30 L350 390 M525 50 L455 370"/>
+    </g>
+    <g fill="#9cf5ff" filter="url(#glow)">
+      <circle cx="90" cy="120" r="5"/><circle cx="180" cy="175" r="5"/><circle cx="300" cy="105" r="6"/>
+      <circle cx="430" cy="80" r="5"/><circle cx="520" cy="145" r="6"/><circle cx="660" cy="120" r="5"/>
+      <circle cx="45" cy="280" r="5"/><circle cx="210" cy="310" r="6"/><circle cx="310" cy="235" r="5"/>
+      <circle cx="470" cy="190" r="6"/><circle cx="570" cy="270" r="5"/><circle cx="680" cy="250" r="5"/>
+    </g>
+  </svg>
+</div>
+<div class="light"></div><div class="scan"></div><div class="particles" id="particles"></div><div class="hud"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div></div>
+<div class="topbar" aria-label="Language selector">
+<button class="lang active" data-lang="kk">ҚАЗ</button><button class="lang" data-lang="ru">РУС</button><button class="lang" data-lang="en">ENG</button>
+</div>
+<div class="author-mark">A.I. SEMINAR · K. ELDAR × A. AIDANA</div>
+<div class="overlay">
+<section class="panel" id="welcome">
+<div class="robot" aria-hidden="true"><div class="antenna"><span class="dot"></span></div><div class="head"><span class="eye e1"></span><span class="eye e2"></span><span class="mouth"></span></div><div class="body"><span class="core"></span></div><div class="arm a1"></div><div class="arm a2"></div></div>
+<div class="badge" id="badge">WELCOME • AI EDUCATION • LIVE</div>
+<h1 id="welcomeTitle">СІЗДІҢ<br>57 МИНУТЫҢЫЗ?</h1>
+<div class="subtitle" id="welcomeSub">Бір ғана сұрақтан бастайық.<br><b>Жауабыңыз семинардың бағытын өзгертеді.</b></div>
+<button class="btn" id="startBtn" onclick="start()">▶ БАСТАЙЫҚ</button>
+<div class="langHint">ҚАЗ • РУС • ENG</div>
+</section>
+
+<section class="panel" id="questions">
+<div class="counter" id="counter">AI FEEDBACK</div><div class="questionNo" id="qno"></div><div class="question" id="qtext"></div><div class="options" id="options"></div><div class="response" id="response"></div><div class="progress"><i id="bar"></i></div><button class="btn next" id="next" onclick="nextQuestion()"></button>
+</section>
+
+<section class="panel" id="final">
+<div class="badge" id="resultBadge">AI PERSONAL PROFILE • НӘТИЖЕ</div><div class="profileIcon" id="profileIcon">🧠</div><div class="profileTitle" id="profileTitle"></div><div class="profileText" id="profileText"></div><div class="profileQuote" id="profileQuote"></div><div class="small" id="resultSmall"></div><button class="btn" id="restartBtn" onclick="location.reload()"></button>
+</section>
+</div>
+<script>
+const data={
+kk:{welcomeTitle:'СІЗДІҢ<br>57 МИНУТЫҢЫЗ?',welcomeSub:'Бір ғана сұрақтан бастайық.<br><b>Жауабыңыз семинардың бағытын өзгертеді.</b>',start:'▶ БАСТАЙЫҚ',next:'КЕЛЕСІ СҰРАҚ →',result:'AI PERSONAL PROFILE • НӘТИЖЕ',restart:'↻ ҚАЙТА БАҒАЛАУ',small:'Бұл — ғылыми диагноз емес 😄 Жауаптарыңызға негізделген шағын семинарлық портрет.',replies:['Керемет таңдау.','Қызық жауап.','Міне, маңыздысы осы.','Дәл осы жерде AI-дың рөлі басталады.']},
+ru:{welcomeTitle:'ВАШИ<br>57 МИНУТ?',welcomeSub:'Начнём с одного вопроса.<br><b>Ваш ответ изменит направление семинара.</b>',start:'▶ НАЧАТЬ',next:'СЛЕДУЮЩИЙ ВОПРОС →',result:'AI PERSONAL PROFILE • РЕЗУЛЬТАТ',restart:'↻ ПРОЙТИ СНОВА',small:'Это не научная диагностика 😄 Небольшой портрет по вашим ответам.',replies:['Отличный выбор.','Интересный ответ.','Вот что действительно важно.','Именно здесь начинается роль AI.']},
+en:{welcomeTitle:'YOUR<br>57 MINUTES?',welcomeSub:'Let’s start with one question.<br><b>Your answer will shape the seminar.</b>',start:'▶ START',next:'NEXT QUESTION →',result:'AI PERSONAL PROFILE • RESULT',restart:'↻ TRY AGAIN',small:'This is not a scientific diagnosis 😄 A short seminar portrait based on your answers.',replies:['Great choice.','Interesting answer.','That is what matters.','This is where AI starts to play a role.']}
+};
+const questions=[
+{q:{kk:'Егер AI сіздің <em>1 сағаттық</em> жұмысыңызды 3 минутта жасап берсе, қалған <em>57 минутты</em> неге жұмсар едіңіз?',ru:'Если AI выполнит вашу <em>часовую</em> работу за 3 минуты, на что вы потратите оставшиеся <em>57 минут</em>?',en:'If AI did your <em>1-hour</em> task in 3 minutes, what would you do with the remaining <em>57 minutes</em>?'},o:{kk:['Оқушымен жеке жұмысқа','Жаңа идея іздеуге','Өзіме және дамуыма','Тағы да жұмыс жасауға'],ru:['На работу с учениками','На поиск новых идей','На себя и развитие','На ещё больше работы'],en:['Work one-on-one with students','Explore new ideas','Invest in myself and growth','Do even more work']}},
+{q:{kk:'Сіз үшін AI — бұл...',ru:'Для вас AI — это...',en:'For you, AI is...'},o:{kk:['Уақыт үнемдейтін құрал','Жеке ассистент','Жаңа мүмкіндік','Әлі зерттеп жүрген технология'],ru:['Инструмент экономии времени','Личный ассистент','Новая возможность','Технология, которую я изучаю'],en:['A time-saving tool','A personal assistant','A new opportunity','A technology I am still exploring']}},
+{q:{kk:'Егер ертең сіздің сабағыңызға <em>AI-ассистент</em> келсе, оған бірінші қандай жұмысты берер едіңіз?',ru:'Если завтра на вашем уроке появится <em>AI-ассистент</em>, какую работу вы дадите ему первой?',en:'If an <em>AI assistant</em> joined your lesson tomorrow, what would you give it first?'},o:{kk:['Сабақ жоспарын','Тапсырмалар жасауды','Оқушы деңгейін талдауды','Презентация/контентті'],ru:['План урока','Создание заданий','Анализ уровня учеников','Презентацию/контент'],en:['Lesson planning','Creating tasks','Analyzing student levels','Presentation/content']}},
+{q:{kk:'Мұғалімнің уақытын ең көп не «жеп» қояды?',ru:'Что больше всего «съедает» время учителя?',en:'What «eats up» the most teacher time?'},o:{kk:['Құжаттар мен жоспарлау','Тапсырма дайындау','Тексеру және бағалау','Контент іздеу'],ru:['Документы и планирование','Подготовка заданий','Проверка и оценивание','Поиск контента'],en:['Documents and planning','Preparing tasks','Checking and grading','Finding content']}},
+{q:{kk:'Ал егер AI тек <em>жылдамдық</em> емес, сапаны да арттырса ше?',ru:'А если AI повысит не только <em>скорость</em>, но и качество?',en:'What if AI improved not only <em>speed</em>, but quality too?'},o:{kk:['Сабағымды өзгертемін','Жаңа әдіс сынаймын','Оқушыға көбірек уақыт бөлемін','Қазірден бастаймын'],ru:['Изменю свой урок','Попробую новый метод','Больше времени ученику','Начну прямо сейчас'],en:['I would change my lesson','Try a new method','Spend more time with students','Start right now']}},
+{q:{kk:'AI сіздің орныңызға мұғалім бола ала ма?',ru:'Может ли AI стать учителем вместо вас?',en:'Can AI become a teacher instead of you?'},o:{kk:['Жоқ, адам керек','Кейбір жұмысты ғана','Ассистент ретінде иә','Бұл сұрақты бірге зерттейік'],ru:['Нет, нужен человек','Только часть работы','Да, как ассистент','Давайте исследуем вместе'],en:['No, humans are needed','Only some tasks','Yes, as an assistant','Let’s explore together']}},
+{q:{kk:'Ең маңызды сұрақ: AI-мен <em>не істей аламын?</em> емес, <em>не үшін істеймін?</em> деген сұраққа дайынсыз ба?',ru:'Главный вопрос: готовы ли вы спросить не <em>«что я могу сделать с AI?»</em>, а <em>«зачем я это делаю?»</em>?',en:'The key question: are you ready to ask not <em>“what can I do with AI?”</em> but <em>“why am I doing it?”</em>?'},o:{kk:['Иә. Бастайық!','Дәл қазір көргім келеді','Практикада тексерейік','Мен дайынмын'],ru:['Да. Начнём!','Хочу увидеть прямо сейчас','Проверим на практике','Я готов'],en:['Yes. Let’s begin!','I want to see it now','Let’s test it in practice','I’m ready']}}
+];
+let lang='kk',qi=0,chosen=false,answers=[];
+const welcome=document.getElementById('welcome'),qs=document.getElementById('questions'),fin=document.getElementById('final'),qtext=document.getElementById('qtext'),options=document.getElementById('options'),response=document.getElementById('response'),next=document.getElementById('next'),bar=document.getElementById('bar');
+function applyLang(){const d=data[lang];document.documentElement.lang=lang;document.getElementById('welcomeTitle').innerHTML=d.welcomeTitle;document.getElementById('welcomeSub').innerHTML=d.welcomeSub;document.getElementById('startBtn').textContent=d.start;document.getElementById('resultBadge').textContent=d.result;document.getElementById('restartBtn').textContent=d.restart;if(qs.style.display==='block')render();document.querySelectorAll('.lang').forEach(x=>x.classList.toggle('active',x.dataset.lang===lang))}
+document.querySelectorAll('.lang').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;applyLang()});
+function start(){welcome.classList.add('fadeout');setTimeout(()=>{welcome.style.display='none';qs.style.display='block';qs.classList.add('fadein');render()},380)}
+function render(){chosen=false;next.classList.remove('show');response.textContent='';const x=questions[qi];document.getElementById('qno').textContent=`QUESTION ${String(qi+1).padStart(2,'0')} / ${questions.length}`;qtext.innerHTML=x.q[lang];options.innerHTML='';x.o[lang].forEach((t,i)=>{const b=document.createElement('button');b.className='option';b.innerHTML=t;b.onclick=()=>choose(b,i);options.appendChild(b)});bar.style.width=((qi+1)/questions.length*100)+'%'}
+function choose(b,i){if(chosen)return;chosen=true;answers[qi]=i;document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');response.textContent=data[lang].replies[i%4];next.textContent=data[lang].next;next.classList.add('show')}
+function nextQuestion(){if(qi<questions.length-1){qs.classList.remove('fadein');qs.classList.add('fadeout');setTimeout(()=>{qi++;qs.classList.remove('fadeout');render();qs.classList.add('fadein')},360)}else{qs.classList.add('fadeout');setTimeout(()=>{qs.style.display='none';makeProfile();fin.style.display='block';fin.classList.add('fadein')},400)}}
+function makeProfile(){const scores={people:0,creative:0,efficiency:0,practical:0};answers.forEach((a,q)=>{if(a==null)return;if(q===0){if(a===0)scores.people+=3;else if(a===1)scores.creative+=3;else if(a===2)scores.people+=2;else scores.efficiency+=2}if(q===1){if(a===0)scores.efficiency+=2;else if(a===1)scores.people+=2;else if(a===2)scores.creative+=2;else scores.practical+=2}if(q===2){if(a===0||a===3)scores.efficiency+=2;else if(a===1)scores.creative+=2;else scores.people+=2}if(q===3){if(a===0||a===3)scores.efficiency+=2;else if(a===1)scores.creative+=2;else scores.people+=2}if(q===4){if(a===0||a===1)scores.creative+=2;else if(a===2)scores.people+=2;else scores.efficiency+=2}if(q===5){if(a===0)scores.practical+=2;else if(a===1)scores.practical+=1;else if(a===2)scores.people+=2;else scores.creative+=2}if(q===6){if(a===0||a===3)scores.creative+=2;else if(a===1)scores.efficiency+=2;else scores.people+=2}});
+const type=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+const profiles={
+people:{icon:'👥',title:{kk:'Адамға бағытталған мұғалім',ru:'Учитель, ориентированный на человека',en:'People-first teacher'},text:{kk:'Сіздің жауаптарыңыздан бір нәрсе анық көрінеді: технология сіз үшін мақсат емес, оқушыға көбірек уақыт бөлуге көмектесетін құрал. Сіз «AI не істейді?» дегеннен гөрі «AI маған адамға көбірек уақыт бере ме?» деп ойлайсыз.',ru:'По вашим ответам видно: технология для вас — не цель, а инструмент, который помогает уделять больше времени ученику. Вы думаете не только о том, что делает AI, но и о том, какое место он освобождает для человека.',en:'Your answers suggest that technology is not the goal for you, but a tool that can create more time for students. You look beyond what AI can do to what it can make more room for.'},joke:{kk:'AI сізге 57 минут берсе, оны Excel-ге емес, адамға жұмсау ықтималдығы жоғары. Excel сәл ренжуі мүмкін 😄',ru:'Если AI подарит вам 57 минут, вы, скорее всего, потратите их на человека, а не на Excel. Excel может слегка обидеться 😄',en:'If AI gives you 57 minutes, you are likely to spend them on people rather than Excel. Excel may feel a little offended 😄'}},
+creative:{icon:'💡',title:{kk:'Идея генераторы',ru:'Генератор идей',en:'Idea generator'},text:{kk:'Сіз жаңа мүмкіндікті көрсеңіз, бірден «ал мұны тағы қалай қолдануға болады?» деп ойлайсыз. AI сіздің қолыңызда шығармашылық серіктеске айналуы мүмкін.',ru:'Увидев новую возможность, вы сразу думаете: «А как ещё это можно применить?» В ваших руках AI может стать творческим партнёром.',en:'When you see a new possibility, you immediately ask: “How else could this be used?” In your hands, AI can become a creative partner.'},joke:{kk:'Сізге 57 минут босаса, демалуға емес, тағы бір жоба ойлап табуға кетуі мүмкін 😄',ru:'Освободившиеся 57 минут могут уйти не на отдых, а на новый проект 😄',en:'Give you 57 free minutes and they may become another project 😄'}},
+efficiency:{icon:'⚡',title:{kk:'Уақыттың стратег-менеджері',ru:'Стратег времени',en:'Time strategist'},text:{kk:'Сіз AI-ды ең алдымен уақытты үнемдеу үшін көресіз. Қайталанатын жұмысты қысқарту, контентті тез дайындау және процесті жеңілдету сіз үшін маңызды.',ru:'Вы прежде всего видите в AI способ экономить время: сокращать рутину, быстрее готовить контент и упрощать процессы.',en:'You primarily see AI as a way to save time: reduce repetitive work, create content faster, and simplify processes.'},joke:{kk:'Сізге 57 минут сыйласа, бірінші сұрағыңыз: «Тағы қанша минут үнемдеуге болады?» 😄',ru:'Получив 57 минут, вы, вероятно, спросите: «А сколько ещё можно сэкономить?» 😄',en:'Give you 57 minutes and your first question may be: “How many more minutes can we save?” 😄'}},
+practical:{icon:'🧭',title:{kk:'Сақтықпен зерттейтін практик',ru:'Практик-исследователь',en:'Practical explorer'},text:{kk:'Сіз технологияға қызығасыз, бірақ бірден сене салмайсыз. Алдымен байқап көріп, нәтижесін тексеріп, содан кейін ғана күнделікті жұмысыңызға енгізгіңіз келеді.',ru:'Вам интересны технологии, но вы не спешите доверять им. Сначала пробуете, проверяете результат и только потом внедряете в работу.',en:'You are curious about technology but do not trust it blindly. You prefer to test it, verify the result, and then bring it into daily work.'},joke:{kk:'AI «Маған сеніңіз» десе, сіз: «Алдымен көрсетіңіз» дейсіз. Дәлел керек 😄',ru:'Если AI говорит «Доверьтесь мне», вы отвечаете: «Сначала покажите». Нужны доказательства 😄',en:'If AI says “Trust me,” you answer: “Show me first.” Evidence matters 😄'}}
+};const p=profiles[type];document.getElementById('profileIcon').textContent=p.icon;document.getElementById('profileTitle').textContent=p.title[lang];document.getElementById('profileText').textContent=p.text[lang];document.getElementById('profileQuote').textContent='«'+p.joke[lang]+'»';document.getElementById('resultSmall').textContent=data[lang].small}
+document.addEventListener('click',e=>{const b=e.target.closest('.btn');if(!b)return;const r=document.createElement('span');r.className='ripple';const rect=b.getBoundingClientRect();r.style.width=r.style.height=Math.max(rect.width,rect.height)+'px';r.style.left=e.clientX-rect.left-rect.width/2+'px';r.style.top=e.clientY-rect.top-rect.height/2+'px';b.appendChild(r);setTimeout(()=>r.remove(),600)});
+for(let i=0;i<85;i++){const p=document.createElement('i');p.className='p';p.style.left=Math.random()*100+'%';p.style.animationDuration=(5+Math.random()*10)+'s';p.style.animationDelay=(-Math.random()*12)+'s';p.style.opacity=.2+Math.random()*.7;document.getElementById('particles').appendChild(p)}
+</script>
+</body></html>
